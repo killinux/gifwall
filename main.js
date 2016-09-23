@@ -6,7 +6,7 @@ function init() {
 	var videoElement;
 	var shooter;
 	var imagesPerRow = 5;
-	var maxImages = 20;
+	var maxImages = 5;
 
 	window.addEventListener('resize', onResize);
 
@@ -19,6 +19,7 @@ function init() {
 		videoElement = videoEl;
 		videoElement.width = width / 4;
 		videoElement.height = height / 4;
+		videoElement.style.display="none";
 		videoWidth = width;
 		videoHeight = height;
 
@@ -36,15 +37,17 @@ function init() {
 		
 		shooter.getShot(onFrameCaptured, 10, 0.2, function onProgress(progress) {
 			// Not doing anything in the callback,
+		//	console.log("---onProgress");
 			// but you could animate a progress bar or similar using the `progress` value
 		});
 
 	}
 
 	function onFrameCaptured(pictureData) {
+		console.log("---onFrameCaptured");
 		var img = document.createElement('img');
 		img.src = pictureData;
-
+	//	console.log(img.src);
 		var imageSize = getImageSize();
 
 		img.style.width = imageSize[0] + 'px';
@@ -56,7 +59,7 @@ function init() {
 			mosaicContainer.removeChild(mosaicContainer.lastChild);	
 		}
 
-		setTimeout(startCapturing, 10);
+	//	setTimeout(startCapturing, 10);
 	}
 
 	function getImageSize() {
@@ -91,4 +94,4 @@ function init() {
 
 }
 
-window.addEventListener('DOMContentLoaded', init);
+//window.addEventListener('DOMContentLoaded', init);

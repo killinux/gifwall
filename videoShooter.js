@@ -24,10 +24,12 @@ function VideoShooter (videoElement) {
 
       // Call back with an r value indicating how far along we are in capture
       progressCallback((numFrames - pendingFrames) / numFrames);
-
+ console.log("--numFrames:"+numFrames +",pendingFrames:"+ pendingFrames );
       if(pendingFrames > 0) {
         setTimeout(captureFrame, interval * 1000); // timeouts are in milliseconds
       } else {
+      	  console.log("numFrames:"+numFrames +",pendingFrames:"+ pendingFrames );
+      	console.log("base:"+(numFrames - pendingFrames) / numFrames);
         ag.getBase64GIF(function(image) {
           ag.destroy();
           callback(image);
